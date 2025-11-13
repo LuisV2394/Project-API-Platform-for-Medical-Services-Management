@@ -24,11 +24,11 @@ def create_app():
     try:
         from app.routes.auth_routes import auth_bp
         from app.models.person import Person
-        #from app.routes.professionals_routes import professionals_bp
+        from app.routes.professionals_routes import professionals_bp
         #from app.routes.units_routes import units_bp
 
         app.register_blueprint(auth_bp)
-        #app.register_blueprint(professionals_bp)
+        app.register_blueprint(professionals_bp)
         #app.register_blueprint(units_bp)
 
     except Exception as e:
@@ -38,8 +38,9 @@ def create_app():
     def ping():
         return {"status": "ok", "database": app.config["SQLALCHEMY_DATABASE_URI"]}
     
-    print("Registered routes:")
+    print("=== REGISTERED ROUTES ===")
     for rule in app.url_map.iter_rules():
         print(rule)
-
+    print("==========================")
+    
     return app

@@ -7,9 +7,9 @@ class Professional(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     person_id = db.Column(db.Integer, db.ForeignKey("people.id"), nullable=False)
-    registration = db.Column(db.String(80), nullable=False)  # matrícula profesional
+    registration_number = db.Column(db.String(80), nullable=False)  
     specialty = db.Column(db.String(120), nullable=False)
-    subspecialty = db.Column(db.String(120))
+    sub_specialty = db.Column(db.String(120))
     is_active = db.Column(db.Boolean, nullable=False, default=True)
     schedule_enabled = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -21,9 +21,9 @@ class Professional(db.Model):
         return {
             "id": self.id,
             "person_id": self.person_id,
-            "registration": self.registration,
+            "registration_number": self.registration_number,
             "specialty": self.specialty,
-            "subspecialty": self.subspecialty,
+            "sub_specialty": self.sub_specialty,
             "is_active": self.is_active,
             "schedule_enabled": self.schedule_enabled,
             "person": self.person.to_dict() if self.person else None

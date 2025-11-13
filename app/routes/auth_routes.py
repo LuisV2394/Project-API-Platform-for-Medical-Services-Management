@@ -5,11 +5,6 @@ from app import db
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
-@auth_bp.route("/login", methods=["GET"])
-def test_login():
-    return "Login endpoint is working"
-
-
 @auth_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
@@ -22,9 +17,12 @@ def login():
     user = User.query.filter_by(username=username).first()
 
     if user and user.check_password(password):
-        # Solo incluimos el id del usuario
-        access_token = create_access_token(identity={"id": user.id})
-        refresh_token = create_refresh_token(identity={"id": user.id})
+        role_names = [role.name for role in user.roles]  # ✅ obtiene todos los roles del usuario
+
+        additional_claims = {"roles": role_names}
+        access_token = create_access_token(identity=str(user.id), additional_claims=additional_claims)
+        refresh_token = create_refresh_token(identity=str(user.id))
+
         return jsonify({
             "access_token": access_token,
             "refresh_token": refresh_token,
@@ -32,8 +30,6 @@ def login():
         }), 200
 
     return jsonify({"error": "Invalid credentials"}), 401
-
-
 
 @auth_bp.route("/refresh", methods=["POST"])
 @jwt_required(refresh=True)

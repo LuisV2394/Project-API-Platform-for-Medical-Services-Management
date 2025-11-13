@@ -1,10 +1,5 @@
+import passlib
 from passlib.hash import bcrypt
 
-# La contraseña que quieres hashear
-password = "Secret123"
-
-# Generar el hash
-hashed = bcrypt.hash(password)
-
-print("Password:", password)
-print("Hashed:", hashed)
+print("Passlib version:", passlib.__version__)
+print("Bcrypt hash test:", bcrypt.hash("Secret123"))

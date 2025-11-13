@@ -1,6 +1,7 @@
 from app import db
 from datetime import datetime
 from passlib.hash import bcrypt
+from app.models.user_role import UserRole
 
 class User(db.Model):
     __tablename__ = "users"
@@ -15,7 +16,11 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     person = db.relationship("Person", back_populates="users")
-
+    roles = db.relationship(
+        "Role",
+        secondary="user_roles",  # en string, porque SQLAlchemy ya conoce la tabla a través del modelo UserRole
+        backref=db.backref("users", lazy="dynamic")
+        )
 
     def set_password(self, password: str):
         self.password_hash = bcrypt.hash(password)
