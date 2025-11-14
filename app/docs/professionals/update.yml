@@ -1,0 +1,12 @@
+tags:
+  - Professionals
+summary: Update a professional
+description: Updates fields of an existing professional.
+parameters:
+  - in: body
+    name: body
+    schema:
+      type: object
+responses:
+  200:
+    description: Professional updated successfully

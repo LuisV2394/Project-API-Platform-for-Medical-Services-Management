@@ -1,0 +1,20 @@
+tags:
+  - Professionals
+summary: Create a new professional
+description: Creates a new professional record.
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        person_id:
+          type: integer
+        registration_number:
+          type: string
+        specialty:
+          type: string
+responses:
+  201:
+    description: Professional created successfully

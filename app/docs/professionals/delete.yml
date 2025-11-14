@@ -1,0 +1,7 @@
+tags:
+  - Professionals
+summary: Deactivate a professional
+description: Marks a professional as inactive.
+responses:
+  200:
+    description: Professional deactivated successfully

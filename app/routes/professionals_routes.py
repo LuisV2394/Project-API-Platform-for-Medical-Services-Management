@@ -8,13 +8,17 @@ import os
 
 professionals_bp = Blueprint("professionals", __name__, url_prefix="/professionals")
 
-yaml_path = os.path.join(os.path.dirname(__file__), '../docs/professionals.yaml')
+BASE_DOCS = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "docs", "professionals")
+)
+print("BASE_DOCS:", BASE_DOCS)  # <-- puedes dejarlo temporalmente para verificar
+
 
 #Obtener todos los profesionales
 @professionals_bp.route("/", methods=["GET"])
 @jwt_required()
 @role_required(["admin"])
-@swag_from(yaml_path)
+@swag_from(os.path.join(BASE_DOCS, 'get_all.yml'))
 def get_all_professionals():
     professionals = Professional.query.all()
     data = [p.to_dict() for p in professionals]
@@ -34,7 +38,7 @@ def get_professional_by_id(professional_id):
 @professionals_bp.route("/", methods=["POST"])
 @jwt_required()
 @role_required(["admin"])
-@swag_from(yaml_path)
+@swag_from(os.path.join(BASE_DOCS, 'create.yml'))
 def create_professional():
     data = request.get_json()
 
@@ -63,7 +67,7 @@ def create_professional():
 @professionals_bp.route("/<int:professional_id>", methods=["PATCH"])
 @jwt_required()
 @role_required(["admin"])
-@swag_from(yaml_path)
+@swag_from(os.path.join(BASE_DOCS, 'update.yml'))
 def update_professional(professional_id):
     professional = Professional.query.get(professional_id)
     if not professional:
@@ -84,7 +88,7 @@ def update_professional(professional_id):
 @professionals_bp.route("/<int:professional_id>", methods=["DELETE"])
 @jwt_required()
 @role_required(["admin"])
-@swag_from(yaml_path)
+@swag_from(os.path.join(BASE_DOCS, 'delete.yml'))
 def deactivate_professional(professional_id):
     professional = Professional.query.get(professional_id)
     if not professional:

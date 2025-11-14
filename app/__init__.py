@@ -22,14 +22,14 @@ def create_app():
     migrate.init_app(app, db)
     jwt.init_app(app)
     
-   
+    init_swagger(app)
 
     try:
         from app.routes.auth_routes import auth_bp
         from app.models.person import Person
         from app.routes.professionals_routes import professionals_bp
         #from app.routes.units_routes import units_bp
-
+    
         app.register_blueprint(auth_bp)
         app.register_blueprint(professionals_bp)
         #app.register_blueprint(units_bp)
@@ -37,7 +37,6 @@ def create_app():
     except Exception as e:
         print(f"Blueprint registration warning: {e}")
 
-    init_swagger(app)
     
     @app.route("/ping")
     def ping():

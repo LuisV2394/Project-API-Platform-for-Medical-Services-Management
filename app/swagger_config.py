@@ -1,52 +1,27 @@
 from flasgger import Swagger
 
 def init_swagger(app):
-    swagger_template = {
+    template = {
         "swagger": "2.0",
         "info": {
             "title": "Healthcare API",
-            "description": "API for managing professionals and medical units",
+            "description": "API para gestión de profesionales y unidades médicas",
             "version": "1.0.0"
         },
+        "schemes": ["http"],
         "securityDefinitions": {
-            "BearerAuth": {
+            "Bearer": {
                 "type": "apiKey",
                 "name": "Authorization",
                 "in": "header",
-                "description": "JWT Authorization header using the Bearer scheme. Example: 'Authorization: Bearer {token}'"
-            }
-        },
-        "definitions": {
-            "Professional": {
-                "type": "object",
-                "properties": {
-                    "id": {"type": "integer"},
-                    "person_id": {"type": "integer"},
-                    "registration_number": {"type": "string"},
-                    "specialty": {"type": "string"},
-                    "sub_specialty": {"type": "string"},
-                    "is_active": {"type": "boolean"},
-                    "schedule_enabled": {"type": "boolean"},
-                    "created_at": {"type": "string"},
-                    "updated_at": {"type": "string"}
-                },
-                "required": ["person_id", "registration_number", "specialty"]
+                "description": "JWT Authorization header usando el esquema Bearer. Ejemplo: 'Bearer {token}'"
             }
         }
     }
 
-    swagger_config = {
-        "headers": [],
-        "specs": [
-            {
-                "endpoint": "apispec_1",
-                "route": "/apispec_1.json",
-                "rule_filter": lambda rule: True,
-                "model_filter": lambda tag: True
-            }
-        ],
-        "swagger_ui": True,
-        "specs_route": "/docs/"
+    app.config["SWAGGER"] = {
+        "title": "Healthcare API",
+        "uiversion": 3,
     }
 
-    Swagger(app, template=swagger_template, config=swagger_config)
+    Swagger(app, template=template)

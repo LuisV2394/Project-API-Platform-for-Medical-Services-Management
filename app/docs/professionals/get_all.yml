@@ -1,0 +1,7 @@
+tags:
+  - Professionals
+summary: Get all professionals
+description: Returns a list of all registered professionals.
+responses:
+  200:
+    description: Successfully returned list of professionals
