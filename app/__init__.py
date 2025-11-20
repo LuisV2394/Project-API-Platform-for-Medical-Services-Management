@@ -36,11 +36,15 @@ def create_app():
         from app.routes.auth_routes import auth_bp
         from app.models.person import Person
         from app.routes.professionals_routes import professionals_bp
-        #from app.routes.units_routes import units_bp
+        from app.routes.users_routes import users_bp
+        from app.routes.people_routes import people_bp
+        from app.routes.units_routes import units_bp
     
         app.register_blueprint(auth_bp)
         app.register_blueprint(professionals_bp)
-        #app.register_blueprint(units_bp)
+        app.register_blueprint(users_bp)
+        app.register_blueprint(people_bp)
+        app.register_blueprint(units_bp)
 
     except Exception as e:
         print(f"Blueprint registration warning: {e}")

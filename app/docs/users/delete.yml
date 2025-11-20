@@ -1,0 +1,63 @@
+tags:
+  - Users
+summary: Update an existing user
+description: Update one or more fields of an existing user by ID.
+parameters:
+  - in: path
+    name: user_id
+    required: true
+    schema:
+      type: integer
+    description: ID of the user to update
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          username:
+            type: string
+          password:
+            type: string
+          email:
+            type: string
+          is_active:
+            type: boolean
+responses:
+  200:
+    description: User updated successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+            user:
+              type: object
+              properties:
+                id:
+                  type: integer
+                username:
+                  type: string
+                email:
+                  type: string
+                is_active:
+                  type: boolean
+                person:
+                  type: object
+                  nullable: true
+                created_at:
+                  type: string
+                updated_at:
+                  type: string
+  404:
+    description: User not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string

@@ -11,8 +11,7 @@ professionals_bp = Blueprint("professionals", __name__, url_prefix="/professiona
 BASE_DOCS = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "docs", "professionals")
 )
-print("BASE_DOCS:", BASE_DOCS)  # <-- puedes dejarlo temporalmente para verificar
-
+print("BASE_DOCS:", BASE_DOCS)  # Para verificar si carga correctamente la ruta
 
 #Obtener todos los profesionales
 @professionals_bp.route("/", methods=["GET"])

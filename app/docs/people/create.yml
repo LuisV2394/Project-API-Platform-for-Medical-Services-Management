@@ -1,0 +1,88 @@
+# routes/people_create.yml
+tags:
+  - People
+summary: Create a new person
+description: Creates a new person record in the system.
+operationId: createPerson
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        document_number:
+          type: string
+          example: "V12345678"
+        first_name:
+          type: string
+          example: "Luis"
+        last_name:
+          type: string
+          example: "Daza"
+        gender:
+          type: string
+          enum: ["M", "F", "OTHER"]
+          example: "M"
+        birth_date:
+          type: string
+          format: date
+          example: "1990-05-20"
+        email:
+          type: string
+          format: email
+          example: "luis.daza@example.com"
+        phone:
+          type: string
+          example: "+584123456789"
+        address:
+          type: string
+          example: "Calle Falsa 123, Caracas, Venezuela"
+        active:
+          type: integer
+          enum: [0, 1]
+          example: 1
+responses:
+  201:
+    description: Person created successfully
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        document_number:
+          type: string
+          example: "V12345678"
+        first_name:
+          type: string
+          example: "Luis"
+        last_name:
+          type: string
+          example: "Daza"
+        gender:
+          type: string
+          example: "M"
+        birth_date:
+          type: string
+          example: "1990-05-20"
+        email:
+          type: string
+          example: "luis.daza@example.com"
+        phone:
+          type: string
+          example: "+584123456789"
+        address:
+          type: string
+          example: "Calle Falsa 123, Caracas, Venezuela"
+        active:
+          type: integer
+          example: 1
+  400:
+    description: Invalid input
+  500:
+    description: Server error

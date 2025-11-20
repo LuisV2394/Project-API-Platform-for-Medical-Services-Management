@@ -1,0 +1,14 @@
+tags:
+  - People
+summary: Update an existing person
+parameters:
+  - in: path
+    name: person_id
+    required: true
+    schema:
+      type: integer
+responses:
+  200:
+    description: Person updated successfully
+  404:
+    description: Person not found

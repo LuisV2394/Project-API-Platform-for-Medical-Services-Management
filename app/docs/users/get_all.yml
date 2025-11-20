@@ -1,0 +1,29 @@
+tags:
+  - Users
+summary: Retrieve all users
+description: Returns a list of all users in the system.
+responses:
+  200:
+    description: List of users
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              username:
+                type: string
+              email:
+                type: string
+              is_active:
+                type: boolean
+              person:
+                type: object
+                nullable: true
+              created_at:
+                type: string
+              updated_at:
+                type: string

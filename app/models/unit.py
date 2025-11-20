@@ -9,6 +9,7 @@ class Unit(db.Model):
     type = db.Column(db.String(60), nullable=False)  # e.g., CONSULTING_ROOM, LAB, IMAGING
     description = db.Column(db.String(255))
     is_active = db.Column(db.Boolean, nullable=False, default=True)
+    phone = db.Column(db.String(45))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 

@@ -1,0 +1,31 @@
+tags:
+  - Units
+summary: Update an existing unit
+parameters:
+  - in: path
+    name: unit_id
+    required: true
+    schema:
+      type: integer
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+          description:
+            type: string
+          phone:
+            type: string
+          is_active:
+            type: boolean
+responses:
+  200:
+    description: Unit updated successfully
+  404:
+    description: Unit not found

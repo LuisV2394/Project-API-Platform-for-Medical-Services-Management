@@ -1,0 +1,13 @@
+tags:
+  - People
+summary: Retrieve all people
+description: Returns a list of all people in the system.
+responses:
+  200:
+    description: List of people
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object

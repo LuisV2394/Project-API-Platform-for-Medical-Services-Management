@@ -1,0 +1,70 @@
+# routes/units_create.yml
+tags:
+  - Units
+summary: Create a new unit
+description: Creates a new medical unit record.
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: Name of the unit
+          example: "Consulting Room 101"
+        type:
+          type: string
+          description: Type of the unit (CONSULTING_ROOM, LAB, IMAGING)
+          example: "CONSULTING_ROOM"
+        description:
+          type: string
+          description: Optional description of the unit
+          example: "First floor consulting room for general check-ups"
+        phone:
+          type: string
+          description: Optional contact phone number
+          example: "+1 555-123-4567"
+        is_active:
+          type: integer
+          enum: [0, 1]
+          description: Whether the unit is active
+          example: 1
+responses:
+  201:
+    description: Unit created successfully
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Unit created successfully"
+        unit:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: "Consulting Room 101"
+            type:
+              type: string
+              example: "CONSULTING_ROOM"
+            description:
+              type: string
+              example: "First floor consulting room for general check-ups"
+            phone:
+              type: string
+              example: "+1 555-123-4567"
+            is_active:
+              type: integer
+              example: 1
+  400:
+    description: Missing required fields
+  500:
+    description: Server error

@@ -1,4 +1,6 @@
 from flasgger import Swagger
+# Para ver la documentación Swagger en /apidocs
+# URL http://127.0.0.1:5000/apidocs/
 
 def init_swagger(app):
     template = {

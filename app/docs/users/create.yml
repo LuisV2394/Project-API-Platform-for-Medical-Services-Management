@@ -1,0 +1,75 @@
+# routes/users_create.yml
+tags:
+  - Users
+summary: Create a new user
+description: Creates a new user record in the system.
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - person_id
+        - username
+        - password
+      properties:
+        person_id:
+          type: integer
+          description: ID of the associated person
+          example: 1
+        username:
+          type: string
+          description: Username for login
+          example: "luisdaza"
+        password:
+          type: string
+          description: Password for login
+          example: "StrongPassword123"
+        email:
+          type: string
+          format: email
+          description: Optional email address
+          example: "luis.daza@example.com"
+        is_active:
+          type: integer
+          enum: [0, 1]
+          description: Whether the user is active
+          example: 1
+responses:
+  201:
+    description: User created successfully
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "User created successfully"
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            person_id:
+              type: integer
+              example: 1
+            username:
+              type: string
+              example: "luisdaza"
+            email:
+              type: string
+              example: "luis.daza@example.com"
+            is_active:
+              type: integer
+              example: 1
+            created_at:
+              type: string
+              example: "2025-11-20T15:00:00"
+            updated_at:
+              type: string
+              example: "2025-11-20T15:00:00"
+  400:
+    description: Missing required fields or invalid input
+  500:
+    description: Server error

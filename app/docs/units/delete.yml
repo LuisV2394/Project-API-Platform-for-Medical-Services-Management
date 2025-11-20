@@ -1,0 +1,14 @@
+tags:
+  - Units
+summary: Deactivate a unit
+parameters:
+  - in: path
+    name: unit_id
+    required: true
+    schema:
+      type: integer
+responses:
+  200:
+    description: Unit deactivated successfully
+  404:
+    description: Unit not found
