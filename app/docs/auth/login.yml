@@ -1,0 +1,44 @@
+tags:
+  - Auth
+summary: User login
+description: Authenticates a user and returns access and refresh tokens along with user data.
+operationId: loginUser
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: "admin"
+        password:
+          type: string
+          example: "secret123"
+responses:
+  200:
+    description: Login successful
+    schema:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        refresh_token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        user:
+          type: object
+          description: User data
+  400:
+    description: Missing username or password
+  401:
+    description: Invalid credentials

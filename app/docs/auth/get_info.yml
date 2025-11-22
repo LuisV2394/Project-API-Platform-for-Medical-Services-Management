@@ -1,0 +1,23 @@
+tags:
+  - Auth
+summary: User login
+operationId: loginUser
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - username
+          - password
+        properties:
+          username:
+            type: string
+            example: admin
+          password:
+            type: string
+            example: secret123
+responses:
+  200:
+    description: Login successful
